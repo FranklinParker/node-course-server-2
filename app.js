@@ -6,8 +6,12 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 const hbs = require('hbs');
 
-var index = require('./routes/index');
+var home = require('./routes/home');
 var users = require('./routes/users');
+const students = require('./routes/student');
+const courses = require('./routes/courses');
+
+
 
 var app = express();
 
@@ -30,8 +34,11 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
+app.use('/home', home);
 app.use('/users', users);
+
+app.use('/api/students', students);
+app.use('/api/courses', courses);
 app.get('/json', (req, resp) => {
     resp.send({
         name: 'joe',
